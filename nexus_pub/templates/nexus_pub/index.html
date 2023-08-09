@@ -1,0 +1,49 @@
+{% extends "nexus_pub/layout.html" %}
+
+{% block title %} {% if category %} {{ category }} | {% endif %} {% endblock %}
+
+{% block body %}
+
+<article class="container">
+    <div class="row">
+        {% if articles %}
+        <h2 class="fw-bold text-md-center my-4">
+            Articles
+        </h2>
+        
+
+        {% for article in articles %}
+        <div class="col-lg-4 col-sm-6 card mb-5 border-0">
+            <div class="pe-md-4">
+                <a href="{% url 'view_article' id=article.id %}">
+                    <div class="ratio ratio-16x9">
+                        {% if article.image %}
+                        <img src="{{ article.image }}" class="img-fluid rounded" style="object-fit: cover;" alt="article Image" loading="lazy">
+                        {% else %}
+                        <img src="https://www.spectraresearch.com/wp-content/uploads/2022/09/default-image.jpg" class="img-fluid rounded" style="object-fit: cover;" alt="article Image" loading="lazy">
+                        {% endif %}
+                    </div>
+                </a>
+                <small class="text-muted text-end">{{ article.date }} · 
+                    <a href="{% url 'index' %}" class="text-decoration-none text-reset">{{ article.author }}</a> · 
+                    <a href="{% url 'index' %}" class="text-decoration-none text-reset">{{ article.category }}</a>
+                </small>
+                <a href="{% url 'view_article' id=article.id %}" class="text-decoration-none text-reset">
+                    <h2 class="card-title fw-bolder fs-5">{{ article.title }}</h2>
+                    <p class="card-text description">{{ article.description|safe }}</p>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% elif category %}
+        <h5 class="my-4 pb-5 text-center fw-bold"> No available articles. </h5>
+        {% elif search %}
+        <h5 class="my-4 pb-5 text-center fw-bold"> No available articles about <span class="text-capitalize">{{ search }}.</span></h5>
+        {% elif date_range %}
+        <h5 class="my-4 pb-5 text-center fw-bold"> No available articles from {{ date_range }}.</h5>
+        {% endif %}
+    </div>
+
+</article>
+
+{% endblock %}

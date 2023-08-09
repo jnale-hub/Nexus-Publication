@@ -1,0 +1,40 @@
+{% extends "nexus_pub/layout.html" %}
+
+{% block title %}{{ user.name }} | {% endblock %}
+
+{% block body %}
+<article class="container">
+    <h2 class="text-center fw-bold py-2">
+        {% if starred %}
+        Starred Articles
+        {% elif saved %}
+        Saved Articles
+        {% endif %}
+    </h2>
+    <div class="row">
+        {% if articles %}
+        {% for article in articles %}
+        <div class="col-lg-8 offset-lg-2">
+            <div class="row mb-4">
+                <div class="col-md-2">
+                    {% if article.image %}
+                        <img src="{{ article.image }}" class="img-fluid" alt="{{ article.title }}">
+                    {% endif %}
+                </div>
+                <div class="col-md-10">
+                    <a href="{% url 'view_article' id=article.id %}" class="text-reset text-decoration-none">
+                        <h5 class="mb-0">{{ article.title }}</h5>
+                        <span class="badge bg-primary">{{ article.category }}</span>
+                        <span class="text-muted">By {{ article.author }}</span>
+                        <span class="text-muted">| {{ article.date_published }}</span>
+                    </a>
+                </div>
+            </div>            
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="">No available article.</p>
+        {% endif %}
+    </div>
+</article>
+{% endblock %}

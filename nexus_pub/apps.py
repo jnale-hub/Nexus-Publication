@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ExampleConfig(AppConfig):
+class NexusPubConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'example'
+    name = 'nexus_pub'
