@@ -27,11 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
+APIKEY = "518f0eb2095245e0a02ac3c97d4cc644"
 
 # Application definition
 
 INSTALLED_APPS = [
     'nexus_pub',
+    'world_news',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
