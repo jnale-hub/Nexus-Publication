@@ -1,0 +1,42 @@
+{% load custom_filters %}
+<div class="title mt-5 my-3 bg-primary light text-white fw-bold">
+    <span class="fs-5">Wordle User Ranking</span>
+    <div id="ranks-restart" title="Reload the Ranking">
+        <i class="bi bi-arrow-clockwise"></i>
+    </div>
+</div>
+<div>
+    <div>
+        <h6 class="fw-bold text-end">You are {% if user_ranking %}{{ user_ranking|ordinalize }}{% else %}not ranked{% endif %} in
+            the ranking</h6>
+    </div>
+    {% for user_result in top_users %}
+    <div class="row border align-items-center p-2">
+        <div class="col-6">
+            <div class="d-flex align-items-center">
+                <div class="ratio ratio-1x1 ms-2" style="width: 28px; height: 28px;">
+                    <img src="{{ user_result.user.picture }}" alt="{{ user_result.user }}"
+                        class="img-fluid rounded-circle" style="object-fit: cover;">
+                </div>
+                <div class="ps-2">
+                    {{ user_result.user }}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <span class="fw-bold">{{ user_result.wordle_won }}</span> Points
+        </div>
+        <div class="col-2 fw-bold">
+            {% if forloop.counter == 1 %}
+            <span class=""> 🥇 1st </span>
+            {% elif forloop.counter == 2 %}
+            <span class=""> 🥈 2nd </span>
+            {% elif forloop.counter == 3 %}
+            <span class=""> 🥉 3rd </span>
+            {% else %}
+            🎖 {{ forloop.counter }}th
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>

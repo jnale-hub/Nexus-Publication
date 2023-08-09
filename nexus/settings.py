@@ -34,6 +34,7 @@ APIKEY = "518f0eb2095245e0a02ac3c97d4cc644"
 INSTALLED_APPS = [
     'nexus_pub',
     'world_news',
+    'nexus_games',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
