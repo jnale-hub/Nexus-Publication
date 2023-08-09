@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.conf import settings
 from datetime import datetime
 from django.http import HttpResponse
-import requests
+from urllib import request as urllib_request
 from django.core.paginator import Paginator
+import json
 
 def index(request):
     # Get the search query parameter
@@ -20,12 +21,12 @@ def index(request):
         api_url = "https://newsapi.org/v2/everything?q={}&sortBy={}&apiKey={}".format(search, "popularity", settings.APIKEY)
 
     try:
-        # Send GET request to the API URL
-        response = requests.get(url=api_url)
-        response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
+        # Send GET request to the API URL using urllib
+        with urllib_request.urlopen(api_url) as response:
+            data = response.read().decode('utf-8')
 
         # Parse the JSON response
-        data = response.json()
+        data = json.loads(data)
 
         # Check if the response status is ok
         if data.get("status") != "ok":
@@ -36,11 +37,8 @@ def index(request):
 
         # Define a function to format the date and get the image URL
         def format_article_data(article):
-            # Format the date
             published_date = datetime.strptime(article.get("publishedAt"), "%Y-%m-%dT%H:%M:%SZ")
             formatted_date = published_date.strftime("%B %d, %Y")
-
-            # Get the image URL or use a default image
             image_url = article.get("urlToImage") or settings.DEFAULT_IMAGE
 
             return {
@@ -51,7 +49,6 @@ def index(request):
                 "publishedat": formatted_date
             }
 
-        # Process articles for both 'headline' and 'data' lists
         context = {
             "success": True,
             "headline": [format_article_data(article) for article in articles[:3]],
@@ -59,17 +56,15 @@ def index(request):
             "categories": categories
         }
 
-        # Add pagination for 'data' list
         paginator = Paginator([format_article_data(article) for article in articles[3:]], per_page=12)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
         context["page_obj"] = page_obj
 
-        # Send the news feed to the template in the context
         return render(request, 'world_news/index.html', context=context)
 
-    except requests.exceptions.RequestException as e:
+    except urllib_request.HTTPError as e:
         return HttpResponse(f"<h1>Request Failed: {e}</h1>")
     except ValueError as e:
         return HttpResponse(f"<h1>Failed to parse JSON response: {e}</h1>")
