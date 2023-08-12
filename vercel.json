@@ -3,6 +3,11 @@
     {
       "src": "nexus/wsgi.py",
       "use": "@vercel/python"
+    },
+    {
+      "src": "/static/(.*)",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "staticfiles_build" }
     }
   ],
   "routes": [

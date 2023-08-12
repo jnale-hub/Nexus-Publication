@@ -1,6 +1,6 @@
 // main.js
 
-import { initBoard, abortGame, rightGuessString, updateStats } from "./game.js"
+import { initBoard, abortGame, rightGuessString } from "./game.js"
 import { showFinalMessage, showLoseModal, showWinModal, showSection, showMessage } from "./ui.js"
 
 document.addEventListener("DOMContentLoaded", function () {
