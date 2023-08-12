@@ -23,3 +23,5 @@ urlpatterns = [
     path('world_news/', include("world_news.urls")),
     path('games/', include("nexus_games.urls"))
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

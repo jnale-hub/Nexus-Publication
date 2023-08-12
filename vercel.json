@@ -12,7 +12,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "studybud/wsgi.py"
+      "dest": "nexus/wsgi.py"
     }
   ]
 }
