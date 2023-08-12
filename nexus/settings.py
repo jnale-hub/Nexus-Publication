@@ -36,7 +36,7 @@ DEFAULT_IMAGE = "https://www.spectraresearch.com/wp-content/uploads/2022/09/defa
 INSTALLED_APPS = [
     'nexus_pub',
     'world_news',
-    'nexus_games',
+    # 'nexus_games',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
