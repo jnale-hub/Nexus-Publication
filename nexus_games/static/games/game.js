@@ -1,6 +1,6 @@
 // game.js
 
-import { WORDS } from "/static/games/words.js";
+import { WORDS } from "./words.js";
 import { showFinalMessage, showWinModal, triggerConfetti, shadeKeyBoard, showMessage, animateCSS } from "./ui.js"
 
 // Assign the number of guesses, word length, and other variables
