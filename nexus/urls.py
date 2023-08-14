@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("nexus_pub.urls")),
     path('world_news/', include("world_news.urls")),
-    # path('games/', include("nexus_games.urls"))
+    path('games/', include("nexus_games.urls"))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
