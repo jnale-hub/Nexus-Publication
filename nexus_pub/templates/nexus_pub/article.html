@@ -12,7 +12,7 @@
             <div class="d-flex justify-content-between mb-3">
                 <a href="#" class="d-flex text-reset">
                     {% if article.author.picture %}
-                    <div class="ratio ratio-1x1 me-2" style="width: 40px; height: 40px;">
+                    <div class="ratio ratio-1x1" style="width: 40px; height: 40px;">
                         <img src="{{ article.author.picture }}" alt="{{ article.author }}"
                             class="img-fluid rounded-circle" style="object-fit: cover;">
                     </div>
@@ -48,9 +48,9 @@
                                     </div>
                             </div>
                             <div class="col-md-8 col-6">
-                                <small class="text-muted text-end">{{ article.date }} · 
-                                    <span>{{ article.author }}</span> · 
-                                    <span>{{ article.category }}</span>
+                                <small class="text-muted text-end">{{ article.date }} 
+                                    <span class="d-none d-md-block"> · {{ article.author }}</span> 
+                                    <span class="d-none d-md-block"> · {{ article.category }}</span>
                                 </small>
                                 <div>
                                     <h2 class="card-title fw-bolder fs-5">{{ article.title }}</h2>
